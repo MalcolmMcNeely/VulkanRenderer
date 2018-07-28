@@ -4,6 +4,16 @@
 
 #include <vector>
 
+struct QueueFamilyIndices
+{
+	int GraphicsFamily = -1;
+
+	bool IsComplete()
+	{
+		return GraphicsFamily >= 0;
+	}
+};
+
 class HelloTriangle
 {
 
@@ -25,6 +35,10 @@ private:
 	bool CheckValidationLayerSupport();
 	std::vector<const char*> GetRequiredExtensions();
 	void SetupDebugCallback();
+	void PickPhysicalDevice();
+	bool IsPhysicalDeviceSuitable(VkPhysicalDevice device);
+	//int RateDeviceSuitability(VkPhysicalDevice device);
+	QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice device);
 
 	// Window variables
 	const int _windowWidth = 800;
@@ -47,6 +61,9 @@ private:
 #endif
 
 	VkDebugReportCallbackEXT _debugCallback;
+
+	// Device
+	VkPhysicalDevice _physicalDevice = VK_NULL_HANDLE;
 
 };
 

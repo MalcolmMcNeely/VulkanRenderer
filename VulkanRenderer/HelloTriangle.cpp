@@ -5,6 +5,7 @@
 #include <functional>
 #include <cstdlib>
 #include <algorithm>
+#include <map>
 
 #include "ValidationCallbacks.h"
 
@@ -96,24 +97,24 @@ void HelloTriangle::CreateInstance()
 
 	// Check that required extension is one of the available extensions
 	{
-VkExtensionProperties tempLastElement = { "temp", 0 };
-extensions.push_back(tempLastElement);
+		VkExtensionProperties tempLastElement = { "temp", 0 };
+		extensions.push_back(tempLastElement);
 
-for (const auto &requiredExtension : requiredExtensions)
-{
-	auto results = find_if(extensions.begin(), extensions.end(),
-		[requiredExtension](const VkExtensionProperties& extension)
-	{
-		return strcmp(extension.extensionName, requiredExtension) == 0;
-	});
+		for (const auto &requiredExtension : requiredExtensions)
+		{
+			auto results = find_if(extensions.begin(), extensions.end(),
+				[requiredExtension](const VkExtensionProperties& extension)
+			{
+				return strcmp(extension.extensionName, requiredExtension) == 0;
+			});
 
-	if (strcmp(results[0].extensionName, tempLastElement.extensionName) == 0)
-	{
-		throw runtime_error("Required extension not supported");
-	}
-}
+			if (strcmp(results[0].extensionName, tempLastElement.extensionName) == 0)
+			{
+				throw runtime_error("Required extension not supported");
+			}
+		}
 
-extensions.pop_back();
+		extensions.pop_back();
 	}
 
 	// Create Vulkan Instance
@@ -172,6 +173,7 @@ bool HelloTriangle::CheckValidationLayerSupport()
 
 std::vector<const char*> HelloTriangle::GetRequiredExtensions()
 {
+	// Setup the Vulkan extensions required by this application
 	uint32_t glfwExtensionCount = 0;
 	const char** glfwExtensions;
 	glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
@@ -199,4 +201,127 @@ void HelloTriangle::SetupDebugCallback()
 	{
 		throw runtime_error("Failed to setup debug callback");
 	}
+}
+
+void HelloTriangle::PickPhysicalDevice()
+{
+	uint32_t deviceCount = 0;
+	vkEnumeratePhysicalDevices(_instance, &deviceCount, nullptr);
+
+	if (deviceCount == 0)
+	{
+		throw runtime_error("Failed to find GPUs with Vulkan support");
+	}
+
+	vector<VkPhysicalDevice> devices(deviceCount);
+	vkEnumeratePhysicalDevices(_instance, &deviceCount, devices.data());
+
+#pragma region Rate devices by suitability
+
+	//// Use an ordered map to automatically sort candidates by increasing score
+	//std::multimap<int, VkPhysicalDevice> candidates;
+
+	//for (const auto& device : devices) 
+	//{
+	//	int score = RateDeviceSuitability(device);
+	//	candidates.insert(std::make_pair(score, device));
+	//}
+
+	//// Check if the best candidate is suitable at all
+	//if (candidates.rbegin()->first > 0) 
+	//{
+	//	_physicalDevice = candidates.rbegin()->second;
+	//}
+	//else 
+	//{
+	//	throw std::runtime_error("Failed to find a suitable GPU");
+	//}
+
+#pragma endregion
+
+	for (const auto& device : devices)
+	{
+		if (IsPhysicalDeviceSuitable(device))
+		{
+			_physicalDevice = device;
+			break;
+		}
+	}
+
+	if (_physicalDevice == VK_NULL_HANDLE)
+	{
+		throw runtime_error("Failed to find a suitable GPU");
+	}
+}
+
+bool HelloTriangle::IsPhysicalDeviceSuitable(VkPhysicalDevice device)
+{
+	// Get device information
+	VkPhysicalDeviceProperties deviceProperties;
+	vkGetPhysicalDeviceProperties(device, &deviceProperties);
+	VkPhysicalDeviceFeatures deviceFeatures;
+	vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
+	
+	// Ensure the device has the correct queue family
+	QueueFamilyIndices indices = FindQueueFamilies(device);
+
+	return deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU &&
+			 deviceFeatures.geometryShader &&
+			 indices.IsComplete();
+}
+
+//int HelloTriangle::RateDeviceSuitability(VkPhysicalDevice device)
+//{
+//	// Get device information
+//	VkPhysicalDeviceProperties deviceProperties;
+//	vkGetPhysicalDeviceProperties(device, &deviceProperties);
+//	VkPhysicalDeviceFeatures deviceFeatures;
+//	vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
+//
+//	int score = 0;
+//
+//	// Discrete GPUs have a significant performance advantage
+//	if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) 
+//	{
+//		score += 1000;
+//	}
+//
+//	// Maximum possible size of textures affects graphics quality
+//	score += deviceProperties.limits.maxImageDimension2D;
+//
+//	// Application can't function without geometry shaders
+//	if (!deviceFeatures.geometryShader) 
+//	{
+//		return 0;
+//	}
+//
+//	return score;
+//}
+
+QueueFamilyIndices HelloTriangle::FindQueueFamilies(VkPhysicalDevice device)
+{
+	QueueFamilyIndices indices;
+
+	uint32_t queueFamilyCount = 0;
+	vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+	vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
+	vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
+
+	int i = 0;
+	for (const auto& queueFamily : queueFamilies)
+	{
+		if (queueFamily.queueCount > 0 && queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+		{
+			indices.GraphicsFamily = i;
+		}
+
+		if (indices.IsComplete())
+		{
+			break;
+		}
+
+		i++;
+	}
+
+	return indices;
 }
