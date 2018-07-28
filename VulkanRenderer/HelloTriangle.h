@@ -2,6 +2,8 @@
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
+#include <vector>
+
 class HelloTriangle
 {
 
@@ -20,6 +22,9 @@ private:
 	void MainLoop();
 
 	void CreateInstance();
+	bool CheckValidationLayerSupport();
+	std::vector<const char*> GetRequiredExtensions();
+	void SetupDebugCallback();
 
 	// Window variables
 	const int _windowWidth = 800;
@@ -30,6 +35,18 @@ private:
 	// Vulkan variables
 	VkInstance _instance;
 
+	// Validation
+	const std::vector<const char*> _validationLayers = {
+		"VK_LAYER_LUNARG_standard_validation"
+	};
+
+#ifdef NDEBUG
+	const bool _enableValidationLayers = false;
+#else
+	const bool _enableValidationLayers = true;
+#endif
+
+	VkDebugReportCallbackEXT _debugCallback;
 
 };
 

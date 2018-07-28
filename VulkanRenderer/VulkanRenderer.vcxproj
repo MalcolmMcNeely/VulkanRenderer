@@ -125,9 +125,11 @@
   <ItemGroup>
     <ClCompile Include="HelloTriangle.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ValidationCallbacks.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HelloTriangle.h" />
+    <ClInclude Include="ValidationCallbacks.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
