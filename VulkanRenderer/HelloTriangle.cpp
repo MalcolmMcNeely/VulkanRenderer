@@ -587,7 +587,7 @@ VkExtent2D HelloTriangle::ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capab
 		return capabilities.currentExtent;
 	}
 
-	VkExtent2D actualExtent = { _windowWidth, _windowHeight };
+	VkExtent2D actualExtent = { (uint32_t)_windowWidth, (uint32_t)_windowHeight };
 	actualExtent.width = max(capabilities.minImageExtent.width, 
 		min(capabilities.maxImageExtent.width, actualExtent.width));
 	actualExtent.height = max(capabilities.minImageExtent.height, 
