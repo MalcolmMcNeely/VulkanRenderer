@@ -1,8 +1,8 @@
 #pragma once
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
-
 #include <vector>
+
+#include "Common.h"
+#include "ShaderHelper.h"
 
 struct QueueFamilyIndices
 {
@@ -53,6 +53,7 @@ private:
 	void CreateSurface();
 	void CreateSwapChain();
 	void CreateImageViews();
+	void CreateGraphicsPipeline();
 
 	SwapChainSupportDetails QuerySwapChainSupport(VkPhysicalDevice device);
 	VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
@@ -101,6 +102,9 @@ private:
 	VkFormat _swapChainImageFormat;
 	VkExtent2D _swapChainExtent;
 	std::vector<VkImageView> _swapChainImageViews;
+
+   // Shaders
+   ShaderHelper _shaderHelper;
 
 };
 

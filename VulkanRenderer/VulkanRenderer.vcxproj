@@ -82,6 +82,10 @@
       <AdditionalLibraryDirectories>C:\VulkanSDK\1.1.77.0\Lib32;C:\Users\Kenshou\Source\repos\VulkanRenderer\VulkanRenderer\Libraries\Lib\GLFW\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -125,11 +129,18 @@
   <ItemGroup>
     <ClCompile Include="HelloTriangle.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ShaderHelper.cpp" />
     <ClCompile Include="ValidationCallbacks.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common.h" />
     <ClInclude Include="HelloTriangle.h" />
+    <ClInclude Include="ShaderHelper.h" />
     <ClInclude Include="ValidationCallbacks.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\HelloTriangle.frag" />
+    <None Include="Shaders\HelloTriangle.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

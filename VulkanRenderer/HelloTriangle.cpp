@@ -46,6 +46,7 @@ void HelloTriangle::InitialiseVulkan()
 	CreateLogicalDevice();
 	CreateSwapChain();
 	CreateImageViews();
+	CreateGraphicsPipeline();
 }
 
 void HelloTriangle::CleanUp()
@@ -621,4 +622,30 @@ void HelloTriangle::CreateImageViews()
 			throw runtime_error("Failed to create image view");
 		}
 	}
+}
+
+void HelloTriangle::CreateGraphicsPipeline()
+{
+   auto vertexShaderCode = _shaderHelper.ReadFile("Shaders/vert.spv");
+   auto fragmentShaderCode = _shaderHelper.ReadFile("Shaders/frag.spv");
+
+   VkShaderModule vertexShaderModule = _shaderHelper.CreateShaderModule(_device, vertexShaderCode);
+   VkShaderModule fragmentShaderModule = _shaderHelper.CreateShaderModule(_device, fragmentShaderCode);
+
+   VkPipelineShaderStageCreateInfo vertexShaderStageInfo = {};
+   vertexShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+   vertexShaderStageInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
+   vertexShaderStageInfo.module = vertexShaderModule;
+   vertexShaderStageInfo.pName = "main";
+
+   VkPipelineShaderStageCreateInfo fragmentShaderStageInfo = {};
+   fragmentShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+   fragmentShaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
+   fragmentShaderStageInfo.module = fragmentShaderModule;
+   fragmentShaderStageInfo.pName = "main";
+
+   VkPipelineShaderStageCreateInfo shaderStages[] = { vertexShaderStageInfo, fragmentShaderStageInfo };
+
+   vkDestroyShaderModule(_device, vertexShaderModule, nullptr);
+   vkDestroyShaderModule(_device, fragmentShaderModule, nullptr);
 }
