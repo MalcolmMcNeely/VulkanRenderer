@@ -149,6 +149,7 @@
     <ClInclude Include="Window\ValidationCallbacks.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Data\window.settings.json" />
     <None Include="packages.config" />
     <None Include="ShaderData\HelloTriangle.frag" />
     <None Include="ShaderData\HelloTriangle.vert" />

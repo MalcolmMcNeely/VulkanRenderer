@@ -51,5 +51,8 @@
     <None Include="ShaderData\HelloTriangle.vert">
       <Filter>ShaderData</Filter>
     </None>
+    <None Include="Data\window.settings.json">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>
