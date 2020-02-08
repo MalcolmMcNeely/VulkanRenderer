@@ -1,59 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Window">
+      <UniqueIdentifier>{80c1cb8b-d8ac-44c4-8c62-8e2b9166b2f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data">
-      <UniqueIdentifier>{678c74e8-7100-49f9-9df7-4af8074867f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renderer">
-      <UniqueIdentifier>{90ff168f-b642-46d1-9446-3918ee12e048}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renderer\Window">
-      <UniqueIdentifier>{57a75c19-dcc7-45c5-ba51-2f590a0dae13}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renderer\Shader">
+    <Filter Include="Shader">
       <UniqueIdentifier>{c02c9b98-29b8-4adf-8e1b-676c21de062b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer\Shader\ShaderFiles">
-      <UniqueIdentifier>{a6d7c8b7-51c0-41db-afb9-2ff617728959}</UniqueIdentifier>
+    <Filter Include="Common">
+      <UniqueIdentifier>{d37eaf1e-576d-4e91-81f6-0830606a3729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderData">
+      <UniqueIdentifier>{678c74e8-7100-49f9-9df7-4af8074867f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{65d64b83-c8ec-4219-9296-db1794feb516}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ShaderHelper.cpp">
-      <Filter>Renderer\Shader</Filter>
+    <ClCompile Include="Shader\Shader.cpp">
+      <Filter>Shader</Filter>
     </ClCompile>
-    <ClCompile Include="HelloTriangle.cpp">
-      <Filter>Renderer\Window</Filter>
+    <ClCompile Include="Window\HelloTriangle.cpp">
+      <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="ValidationCallbacks.cpp">
-      <Filter>Renderer\Window</Filter>
+    <ClCompile Include="Window\ValidationCallbacks.cpp">
+      <Filter>Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common.h">
-      <Filter>Renderer</Filter>
+    <ClInclude Include="Common\Common.h">
+      <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderHelper.h">
-      <Filter>Renderer\Shader</Filter>
+    <ClInclude Include="Shader\Shader.h">
+      <Filter>Shader</Filter>
     </ClInclude>
-    <ClInclude Include="HelloTriangle.h">
-      <Filter>Renderer\Window</Filter>
+    <ClInclude Include="Window\HelloTriangle.h">
+      <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="ValidationCallbacks.h">
-      <Filter>Renderer\Window</Filter>
+    <ClInclude Include="Window\ValidationCallbacks.h">
+      <Filter>Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\HelloTriangle.frag">
-      <Filter>Renderer\Shader\ShaderFiles</Filter>
-    </None>
-    <None Include="Shaders\HelloTriangle.vert">
-      <Filter>Renderer\Shader\ShaderFiles</Filter>
-    </None>
     <None Include="packages.config" />
+    <None Include="ShaderData\HelloTriangle.frag">
+      <Filter>ShaderData</Filter>
+    </None>
+    <None Include="ShaderData\HelloTriangle.vert">
+      <Filter>ShaderData</Filter>
+    </None>
   </ItemGroup>
 </Project>

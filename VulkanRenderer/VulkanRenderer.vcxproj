@@ -137,21 +137,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="HelloTriangle.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ShaderHelper.cpp" />
-    <ClCompile Include="ValidationCallbacks.cpp" />
+    <ClCompile Include="Shader\Shader.cpp" />
+    <ClCompile Include="Window\HelloTriangle.cpp" />
+    <ClCompile Include="Window\ValidationCallbacks.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common.h" />
-    <ClInclude Include="HelloTriangle.h" />
-    <ClInclude Include="ShaderHelper.h" />
-    <ClInclude Include="ValidationCallbacks.h" />
+    <ClInclude Include="Common\Common.h" />
+    <ClInclude Include="Shader\Shader.h" />
+    <ClInclude Include="Window\HelloTriangle.h" />
+    <ClInclude Include="Window\ValidationCallbacks.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Shaders\HelloTriangle.frag" />
-    <None Include="Shaders\HelloTriangle.vert" />
+    <None Include="ShaderData\HelloTriangle.frag" />
+    <None Include="ShaderData\HelloTriangle.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

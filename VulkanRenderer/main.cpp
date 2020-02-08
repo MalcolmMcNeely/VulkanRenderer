@@ -5,7 +5,9 @@
 
 #include <iostream>
 
-#include "HelloTriangle.h"
+#include "Window/HelloTriangle.h"
+
+using namespace window;
 
 int main() 
 {
