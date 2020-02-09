@@ -2,12 +2,4 @@
 
 namespace window {
 
-   ValidationCallbacks::ValidationCallbacks()
-   {
-   }
-
-   ValidationCallbacks::~ValidationCallbacks()
-   {
-   }
-
 }

@@ -15,15 +15,6 @@
 using namespace std;
 
 namespace window {
-
-	HelloTriangle::HelloTriangle()
-	{
-	}
-
-	HelloTriangle::~HelloTriangle()
-	{
-	}
-
 	void HelloTriangle::Run()
 	{
 		InitialiseWindow();
@@ -34,11 +25,7 @@ namespace window {
 
 	void HelloTriangle::InitialiseWindow()
 	{
-		glfwInit();
-		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);  // Do not create an OpenGL context
-		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // Disable window resizing
-
-		_window = glfwCreateWindow(_windowWidth, _windowHeight, _windowTitle, nullptr, nullptr);
+		pWindow = window.Get();
 	}
 
 	void HelloTriangle::InitialiseVulkan()
@@ -70,13 +57,13 @@ namespace window {
 
 		vkDestroySurfaceKHR(_instance, _surface, nullptr);
 		vkDestroyInstance(_instance, nullptr);
-		glfwDestroyWindow(_window);
+		window.Destroy();
 		glfwTerminate();
 	}
 
 	void HelloTriangle::MainLoop()
 	{
-		while (!glfwWindowShouldClose(_window))
+		while (!glfwWindowShouldClose(pWindow))
 		{
 			glfwPollEvents();
 
@@ -143,7 +130,7 @@ namespace window {
 		VkInstanceCreateInfo createInfo = {};
 		createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
 		createInfo.pApplicationInfo = &appInfo;
-		createInfo.enabledExtensionCount = requiredExtensions.size();
+		createInfo.enabledExtensionCount = (uint32_t)requiredExtensions.size();
 		createInfo.ppEnabledExtensionNames = requiredExtensions.data();
 
 		if (_enableValidationLayers)
@@ -445,7 +432,7 @@ namespace window {
 
 	void HelloTriangle::CreateSurface()
 	{
-		if (glfwCreateWindowSurface(_instance, _window, nullptr, &_surface) != VK_SUCCESS)
+		if (glfwCreateWindowSurface(_instance, pWindow, nullptr, &_surface) != VK_SUCCESS)
 		{
 			throw runtime_error("Failed to create window surface");
 		}
@@ -594,7 +581,7 @@ namespace window {
 			return capabilities.currentExtent;
 		}
 
-		VkExtent2D actualExtent = { (uint32_t)_windowWidth, (uint32_t)_windowHeight };
+		VkExtent2D actualExtent = { (uint32_t)window.Width(), (uint32_t)window.Height() };
 		actualExtent.width = max(capabilities.minImageExtent.width,
 			min(capabilities.maxImageExtent.width, actualExtent.width));
 		actualExtent.height = max(capabilities.minImageExtent.height,

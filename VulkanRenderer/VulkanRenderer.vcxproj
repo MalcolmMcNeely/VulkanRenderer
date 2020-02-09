@@ -141,12 +141,14 @@
     <ClCompile Include="Shader\Shader.cpp" />
     <ClCompile Include="Window\HelloTriangle.cpp" />
     <ClCompile Include="Window\ValidationCallbacks.cpp" />
+    <ClCompile Include="Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="Shader\Shader.h" />
     <ClInclude Include="Window\HelloTriangle.h" />
     <ClInclude Include="Window\ValidationCallbacks.h" />
+    <ClInclude Include="Window\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\window.settings.json" />

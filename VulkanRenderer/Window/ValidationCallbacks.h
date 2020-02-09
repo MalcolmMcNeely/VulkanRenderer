@@ -7,9 +7,6 @@ namespace window {
 	class ValidationCallbacks
 	{
 	public:
-		ValidationCallbacks();
-		~ValidationCallbacks();
-
 		static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(VkDebugReportFlagsEXT flags,				// Message type
 			VkDebugReportObjectTypeEXT objType,	// Typoe of object that is the subject of the message
 			uint64_t obj,
@@ -30,7 +27,7 @@ namespace window {
 		{
 			auto func = (PFN_vkCreateDebugReportCallbackEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugReportCallbackEXT");
 
-			if (func != nullptr)
+			if (func)
 			{
 				return func(instance, pCreateInfo, pAllocator, pCallback);
 			}
@@ -46,7 +43,7 @@ namespace window {
 		{
 			auto func = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugReportCallbackEXT");
 
-			if (func != nullptr)
+			if (func)
 			{
 				func(instance, callback, pAllocator);
 			}

@@ -4,6 +4,8 @@
 #include "../Common/Common.h"
 #include "../Shader/Shader.h"
 
+#include "Window.h"
+
 using namespace shader;
 
 namespace window {
@@ -31,9 +33,6 @@ namespace window {
 	{
 
 	public:
-
-		HelloTriangle();
-		~HelloTriangle();
 
 		void Run();
 
@@ -65,10 +64,8 @@ namespace window {
 		VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
 		// Window variables
-		const int _windowWidth = 800;
-		const int _windowHeight = 600;
-		const char* _windowTitle = "Vulkan Triangle";
-		GLFWwindow* _window;
+		Window window;
+		GLFWwindow* pWindow;
 
 		// Vulkan variables
 		VkInstance _instance;

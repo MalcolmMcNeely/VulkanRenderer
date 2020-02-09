@@ -4,15 +4,6 @@
 using namespace std;
 
 namespace shader {
-
-   Shader::Shader()
-   {
-   }
-
-   Shader::~Shader()
-   {
-   }
-
    vector<char> Shader::ReadFile(const string& filename)
    {
       ifstream file(filename, ios::ate | ios::binary);
