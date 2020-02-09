@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <map>
 #include <set>
+#include <thread>
+#include <chrono>
 
 #include "ValidationCallbacks.h"
 
@@ -77,6 +79,8 @@ namespace window {
 		while (!glfwWindowShouldClose(_window))
 		{
 			glfwPollEvents();
+
+			this_thread::sleep_for(chrono::milliseconds(250));
 		}
 	}
 
