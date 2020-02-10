@@ -5,26 +5,35 @@
 
 #include <iostream>
 
-#include "Window/HelloTriangle.h"
+#include "Application.h"
 
-using namespace window;
+using namespace application;
 
 int main() 
 {
-	HelloTriangle app;
+	Application app;
+	int exitCode = EXIT_SUCCESS;
+
+	app.Initialise();
+
 	int n;
 
 	try 
 	{
-		app.Run();
+		app.MainLoop();
 	}
 	catch (const std::exception& e) 
 	{
 		std::cerr << e.what() << std::endl;
 		std::cin >> n;
-		return EXIT_FAILURE;
+
+		
+		exitCode = EXIT_FAILURE;
 	}
 
 	std::cin >> n;
-	return EXIT_SUCCESS;
+
+	app.Destroy();
+
+	return exitCode;
 }

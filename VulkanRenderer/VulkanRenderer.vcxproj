@@ -137,18 +137,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shader\Shader.cpp" />
     <ClCompile Include="Window\HelloTriangle.cpp" />
+    <ClCompile Include="Window\Renderer.cpp" />
     <ClCompile Include="Window\ValidationCallbacks.cpp" />
-    <ClCompile Include="Window\Window.cpp" />
+    <ClCompile Include="Window\RenderWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application.h" />
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="Shader\Shader.h" />
     <ClInclude Include="Window\HelloTriangle.h" />
+    <ClInclude Include="Window\Renderer.h" />
     <ClInclude Include="Window\ValidationCallbacks.h" />
-    <ClInclude Include="Window\Window.h" />
+    <ClInclude Include="Window\RenderWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\window.settings.json" />

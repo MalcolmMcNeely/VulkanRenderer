@@ -14,7 +14,7 @@
 
 using namespace std;
 
-namespace window {
+namespace renderer {
 	void HelloTriangle::Run()
 	{
 		InitialiseWindow();

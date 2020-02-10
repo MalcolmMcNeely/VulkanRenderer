@@ -4,11 +4,11 @@
 #include "../Common/Common.h"
 #include "../Shader/Shader.h"
 
-#include "Window.h"
+#include "RenderWindow.h"
 
 using namespace shader;
 
-namespace window {
+namespace renderer {
 
 	struct QueueFamilyIndices
 	{
@@ -64,7 +64,7 @@ namespace window {
 		VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
 		// Window variables
-		Window window;
+		RenderWindow window;
 		GLFWwindow* pWindow;
 
 		// Vulkan variables

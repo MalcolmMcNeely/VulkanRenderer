@@ -1,5 +1,5 @@
 #include "ValidationCallbacks.h"
 
-namespace window {
+namespace renderer {
 
 }

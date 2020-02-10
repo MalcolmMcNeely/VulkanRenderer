@@ -1,8 +1,8 @@
 #pragma once
 #include "../Common/Common.h"
 
-namespace window {
-   class Window {
+namespace renderer {
+   class RenderWindow {
    public:
       void Destroy();
       GLFWwindow* Get();

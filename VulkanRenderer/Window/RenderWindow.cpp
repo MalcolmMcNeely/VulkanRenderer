@@ -1,7 +1,7 @@
-#include "Window.h"
+#include "RenderWindow.h"
 
-namespace window {
-   GLFWwindow* Window::Get()
+namespace renderer {
+   GLFWwindow* RenderWindow::Get()
    {
       if (!pWindow)
       {
@@ -11,12 +11,13 @@ namespace window {
       return pWindow;
    }
 
-   void Window::Destroy()
+   void RenderWindow::Destroy()
    {
       glfwDestroyWindow(pWindow);
+      glfwTerminate();
    }
 
-   void Window::Initialise()
+   void RenderWindow::Initialise()
    {
       glfwInit();
       glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);  // Do not create an OpenGL context
